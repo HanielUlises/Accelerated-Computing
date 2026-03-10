@@ -2,14 +2,14 @@
 #include <iostream>
 #include <mutex>
 
-// #define NO_DEADLOCK
+// #define DEADLOCK
 
 int sushi_count = 1000;
 
 void philosopher(std::mutex &first_chopstick, std::mutex &second_chosptick) {
     while(sushi_count > 0) {
-        first_chopstick.lock();
-        second_chosptick.lock();
+        std::scoped_lock<std::mutex> scp_lck1(first_chopstick);
+        std::scoped_lock<std::mutex> scp_lck2(second_chosptick);
         
         if(sushi_count) sushi_count--;
 
@@ -19,12 +19,10 @@ void philosopher(std::mutex &first_chopstick, std::mutex &second_chosptick) {
 }
 
 int main() {
-    #ifdef NO_DEADLOCK
-    // Chopstick A is the highest priority chopstick
-    // Agents should take the highest priority chopstick first
+    #ifdef DEADLOCK
     std::mutex chopstick_a, chopstick_b;
     std::thread agent_1(philosopher, std::ref(chopstick_a), std::ref(chopstick_b));
-    std::thread agent_2(philosopher, std::ref(chopstick_a), std::ref(chopstick_b));
+    std::thread agent_2(philosopher, std::ref(chopstick_b), std::ref(chopstick_a));
     #endif
 
     std::mutex chopstick_a, chopstick_b;
