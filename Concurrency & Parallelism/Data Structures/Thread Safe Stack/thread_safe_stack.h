@@ -11,6 +11,7 @@ class trivial_thread_safe_stack {
 
     public:
         void push(T element);
+        void pop(T &value);
         std::shared_ptr<T> pop();
         T& top();
         bool empty();
