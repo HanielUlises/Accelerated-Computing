@@ -7,9 +7,12 @@ void trivial_thread_safe_stack<T>::push(T element) {
 }
 
 template <typename T>
-void trivial_thread_safe_stack<T>::pop() {
+std::shared_ptr<T>  trivial_thread_safe_stack<T>::pop() {
     std::lock_guard<std::mutex> lck_grd(mut);
+    if (_stack.empty()) throw std::runtime_error("Stack is empty\n");
+    std::shared_ptr<T> res(_stack.top());
     _stack.pop();
+    return res;
 }
 
 template <typename T>

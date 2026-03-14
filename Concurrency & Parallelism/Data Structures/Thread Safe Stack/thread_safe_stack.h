@@ -2,6 +2,7 @@
 #include <mutex>
 #include <stack>
 #include <thread>
+#include <memory>
 
 template <typename T>
 class trivial_thread_safe_stack {
@@ -10,7 +11,7 @@ class trivial_thread_safe_stack {
 
     public:
         void push(T element);
-        void pop();
+        std::shared_ptr<T> pop();
         T& top();
         bool empty();
         size_t size();
