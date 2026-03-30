@@ -2,6 +2,7 @@
 #include <condition_variable>
 #include <thread>
 #include <mutex>
+#include <array>
 
 int soup_servings = 10;
 std::mutex slow_cooker_lid;
@@ -25,3 +26,15 @@ void hungry_person(int id) {
     std::cout << "Person " << id << " put the lid back " << put_lid_back << " times" << '\n';
 }
 
+int main() {
+    std::array<std::thread, 5> hungry_threads;
+
+    for(int i = 0; i < 5; i++) 
+        hungry_threads[i] = std::thread(hungry_person, i);
+    
+
+    for(auto &ht : hungry_threads) 
+        ht.join();
+
+    return;
+}
