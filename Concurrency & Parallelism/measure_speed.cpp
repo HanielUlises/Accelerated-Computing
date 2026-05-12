@@ -20,9 +20,9 @@ ull parallel_sum(ui low, ui high, int depth = 0) {
         return sum;
     } else {
         int mid = low + (high - low) / 2;
-        int left = parallel_sum(low, mid, depth++);
-        int right = parallel_sum(mid, high, depth++);
-        return left + right;
+        std::future<ull> left = std::async(std::launch::async ,parallel_sum, low, mid, depth + 1);
+        std::future<ull> right = std::async(std::launch::async, parallel_sum, mid, high, depth + 1);
+        return left.get() + right.get();
     }   
 }
 
