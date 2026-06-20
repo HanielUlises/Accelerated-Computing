@@ -44,7 +44,7 @@ public:
         std::unique_lock<std::mutex> lock(coordination_mutex);
         // TODO: Implement turn_signal.wait() with lambda predicate
         // Lambda should capture this and thread_id, return true when next_thread_to_execute == thread_id
-        turn_signal.wait([this, int thread_id] () {return next_thread_to_execute == thread_id});
+        turn_signal.wait([this, thread_id] () {return next_thread_to_execute == thread_id;});
         
         // This thread's turn - execute the printing sequence
         std::cout << "=== " << location_name << " Restaurant Announcement ===" << std::endl;
