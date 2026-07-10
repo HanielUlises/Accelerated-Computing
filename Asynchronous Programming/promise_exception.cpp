@@ -4,6 +4,10 @@
 #include <stdexcept>
 #include <cmath>
 
+void throw_exception() {
+    // 
+}
+
 void calculate_square_root(std::promise<int> &prom) {
     int x = 1;
     std::cout << "Please enter an integer value";
