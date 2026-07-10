@@ -5,13 +5,18 @@
 #include <cmath>
 #include <mutex>
 
-void print_result(std::future<int> &fut) {
-    if(fut.valid()) {
-        std::cout << "[This is valid future]\n";
-        std::cout << fut.get() << '\n';
-    } else {
-        std::cout << "[Invalid future]\n";
-    }
+// WRONK!! Race condition
+// void print_result(std::future<int> &fut) {
+//     if(fut.valid()) {
+//         std::cout << "[This is valid future]\n";
+//         std::cout << fut.get() << '\n';
+//     } else {
+//         std::cout << "[Invalid future]\n";
+//     }
+// }
+
+void print_result(std::shared_future<int> &fut) {
+    std::cout << fut.get() << "\n";
 }
 
 void run_code() {
