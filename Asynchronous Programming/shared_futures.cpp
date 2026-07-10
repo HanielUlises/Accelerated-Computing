@@ -6,11 +6,11 @@
 #include <mutex>
 
 void print_result(std::future<int> &fut) {
-    try {
-        int x = fut.get();
-        std::cout << "Value: " << x << std::endl;
-    } catch (std::exception &e) {
-        std::cout << "[exception caught: " << e.what() << "]\n";
+    if(fut.valid()) {
+        std::cout << "[This is valid future]\n";
+        std::cout << fut.get() << '\n';
+    } else {
+        std::cout << "[Invalid future]\n";
     }
 }
 
