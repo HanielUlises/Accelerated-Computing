@@ -34,6 +34,5 @@ int main() {
     thread1.request_stop();
     thread2.request_stop();
 
-    
     return 0;
 }
