@@ -26,6 +26,14 @@ void alternate_job() {
 }
 
 int main() {
+    std::cout << '\n';
     std::jthread thread1(assigned_job);
+    std::jthread thread2(alternate_job);
+
+    std::this_thread::sleep_for(1.0s);
+    thread1.request_stop();
+    thread2.request_stop();
+
+    
     return 0;
 }
