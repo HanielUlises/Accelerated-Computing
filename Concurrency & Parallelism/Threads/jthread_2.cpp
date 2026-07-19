@@ -16,6 +16,15 @@ void assigned_job(std::stop_token token) {
     std::cout << "Task: [" << std::this_thread::get_id() << "]\n";
 }
 
+void alternate_job() {
+    int counter{0};
+    while(counter < 10) {
+        std::this_thread::sleep_for(0.2s);
+        std::cerr << "This is non-interruptible thread: " << counter << '\n';
+        ++counter;
+    }
+}
+
 int main() {
     std::jthread thread1(assigned_job);
     return 0;
