@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 __global__ void test01() {
-
+    printf("\nThe block IS is [%d] -- The thread ID is [%i]", blockIdx.x, threadIdx.x);
 }
 
 int main() {
