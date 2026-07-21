@@ -8,6 +8,7 @@ __global__ void test01() {
 }
 
 int main() {
+    // kernel_name<<<num_of_blocks, num_of_threads_per_block>>>();
     test01 << <1,1>> > ();
     return 0;
 }
