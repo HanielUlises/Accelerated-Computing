@@ -1,0 +1,40 @@
+# Project-level clangd config for the CUDA sources in this directory.
+# Merged on top of ~/.config/clangd/config.yaml; kept self-contained so the
+# repo also works on a machine without that user-level file.
+CompileFlags:
+  Compiler: clang++
+  Add:
+    - -xcuda
+    - -std=c++20
+    - --cuda-path=/usr/local/cuda-12.9
+    - -I/usr/local/cuda-12.9/include
+    - --cuda-gpu-arch=sm_86
+    - -Wno-unknown-cuda-version
+    - --gcc-install-dir=/usr/lib/gcc/x86_64-linux-gnu/14
+    - -Wall
+    - -Wextra
+  Remove:
+    - -gencode*
+    - --generate-code*
+    - -arch=*
+    - -ccbin*
+    - -Xcompiler*
+    - -Xptxas*
+    - --expt-relaxed-constexpr
+    - --expt-extended-lambda
+    - -lineinfo
+    - -G
+
+Index:
+  Background: Build
+
+InlayHints:
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true
+
+Hover:
+  ShowAKA: true
+
+Diagnostics:
+  UnusedIncludes: None

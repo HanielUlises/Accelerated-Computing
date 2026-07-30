@@ -1,0 +1,16 @@
+---
+Language: Cpp
+BasedOnStyle: LLVM
+Standard: c++20
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ColumnLimit: 100
+AccessModifierOffset: -4
+PointerAlignment: Left
+AllowShortFunctionsOnASingleLine: Inline
+AlwaysBreakTemplateDeclarations: Yes
+SpaceAfterTemplateKeyword: false
+IncludeBlocks: Preserve
+# Keep <<<grid, block>>> launches from being mangled.
+SpaceBeforeParens: ControlStatements
