@@ -1,0 +1,22 @@
+# Repo-wide clangd defaults. Without this, clangd falls back to gnu++17 for any
+# file with no compile_commands.json entry, so C++20 (std::jthread,
+# std::stop_token, coroutines, execution policies) shows up as errors.
+#
+# The CUDA subdirectory has its own .clangd that adds the toolkit flags on top.
+CompileFlags:
+  Compiler: g++-14
+  Add:
+    - -std=c++20
+    - -Wall
+    - -Wextra
+
+Index:
+  Background: Build
+
+InlayHints:
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true
+
+Hover:
+  ShowAKA: true

@@ -36,5 +36,11 @@ InlayHints:
 Hover:
   ShowAKA: true
 
+Completion:
+  # Never auto-insert headers in CUDA sources: clangd would offer its own
+  # internal <__clang_cuda_builtin_vars.h> for threadIdx/blockIdx, which nvcc
+  # cannot find. cuda_runtime.h already provides them.
+  HeaderInsertion: Never
+
 Diagnostics:
   UnusedIncludes: None

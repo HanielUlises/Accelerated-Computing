@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+# CUDA / build artifacts
+build/
+*.ptx
+*.cubin
+*.fatbin
+*.sass
+*.qdrep
+*.nsys-rep
+*.ncu-rep
+
+# Editor / LSP
+compile_commands.json
+.cache/
