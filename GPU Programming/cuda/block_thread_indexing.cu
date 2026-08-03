@@ -36,7 +36,7 @@ int main() {
     cudaMemcpy(d_B, B, size, cudaMemcpyHostToDevice);
 
     // Step 5 --> Launch the vector add cuda kernel
-    vector_add<<<1, 1024>>> (d_A, d_B, d_C, SIZE);
+    vector_add<<<2, 1024>>> (d_A, d_B, d_C, SIZE);
 
     // Step 6 --> copy result back to host
     cudaMemcpy(C, d_C, size, cudaMemcpyDeviceToHost);
