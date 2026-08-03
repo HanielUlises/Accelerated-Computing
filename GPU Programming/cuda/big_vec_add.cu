@@ -2,7 +2,7 @@
 #include <__clang_cuda_builtin_vars.h>
 #include <cstdio>
 
-#define SIZE 2048
+#define SIZE 1024 * 432 * 1024
 
 // Cuda kernel for vector addition
 __global__ void vector_add(int *A, int *B, int *C, int n) {
@@ -10,6 +10,11 @@ __global__ void vector_add(int *A, int *B, int *C, int n) {
     C[i] = A[i] + B[i];
 }
 
+void random_ints(int *a, int size) {
+    for(int i = 0; i < size; i++) {
+        a[i] = rand() % 100;
+    }
+}
 
 int main() {
     // Step 1 allocate memory space
@@ -28,10 +33,8 @@ int main() {
     cudaMalloc((void**)&d_C, size);
 
     // Step 4 --> initialize the inputs
-    for(int i = 0; i < SIZE; i++) {
-        A[i] = i;
-        B[i] = SIZE - i;
-    }
+    random_ints(A, size);
+    random_ints(B, size);
     cudaMemcpy(d_A, A, size, cudaMemcpyHostToDevice);
     cudaMemcpy(d_B, B, size, cudaMemcpyHostToDevice);
 
