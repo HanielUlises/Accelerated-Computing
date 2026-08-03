@@ -1,11 +1,12 @@
 #include "cuda_runtime.h"
+#include <__clang_cuda_builtin_vars.h>
 #include <cstdio>
 
-#define SIZE 1024
+#define SIZE 2048
 
 // Cuda kernel for vector addition
 __global__ void vector_add(int *A, int *B, int *C, int n) {
-    int i = static_cast<int>(threadIdx.x);
+    int i = static_cast<int>(threadIdx.x + blockIdx.x + blockDim.x);
     C[i] = A[i] + B[i];
 }
 
